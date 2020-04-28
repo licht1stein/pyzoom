@@ -15,20 +15,20 @@ class APIClientBase:
     api_key: str = attr.ib(repr=False)
     api_secret: str = attr.ib(repr=False)
 
-    name = 'zoom_api_client'
-    user_id: str = 'me'
-    base_url: str = 'https://api.zoom.us/v2'
+    name = "zoom_api_client"
+    user_id: str = "me"
+    base_url: str = "https://api.zoom.us/v2"
 
     def bearer_token(self) -> str:
         return self.generate_jwt(self.api_key, self.api_secret)
 
     def make_request(
-            self,
-            endpoint: str,
-            method: Literal["GET", "POST", "PATCH", "DELETE", 'PUT'],
-            query: Dict = None,
-            body: Dict = None,
-            raise_on_error=True,
+        self,
+        endpoint: str,
+        method: Literal["GET", "POST", "PATCH", "DELETE", "PUT"],
+        query: Dict = None,
+        body: Dict = None,
+        raise_on_error=True,
     ) -> requests.Response:
         allowed_methods = "GET POST PATCH DELETE PUT".split()
         if method not in allowed_methods:
@@ -68,30 +68,36 @@ class APIClientBase:
             raise err.APIError(message)
 
     def get(
-            self, endpoint: str, query: Dict = None, raise_on_error: bool = True
+        self, endpoint: str, query: Dict = None, raise_on_error: bool = True
     ) -> requests.Response:
         return self.make_request(
             endpoint, method="GET", query=query, raise_on_error=raise_on_error
         )
 
-    def get_all_pages(self, endpoint: str, query: Dict = None, raise_on_error: bool = True) -> Dict:
+    def get_all_pages(
+        self, endpoint: str, query: Dict = None, raise_on_error: bool = True
+    ) -> Dict:
         res = self.get(endpoint, query=query, raise_on_error=raise_on_error).json()
-        next_page_token = res.get('next_page_token')
+        next_page_token = res.get("next_page_token")
         while next_page_token:
-            next_page_res = self.get(endpoint, query={'next_page_token': next_page_token}, raise_on_error=raise_on_error).json()
-            next_page_token = next_page_res.get('next_page_token')
+            next_page_res = self.get(
+                endpoint,
+                query={"next_page_token": next_page_token},
+                raise_on_error=raise_on_error,
+            ).json()
+            next_page_token = next_page_res.get("next_page_token")
             for k, v in next_page_res.items():
                 if isinstance(v, list):
                     res[k].extend(v)
-        res['next_page_token'] = next_page_token
+        res["next_page_token"] = next_page_token
         return res
 
     def post(
-            self,
-            endpoint: str,
-            query: Dict = None,
-            body: Dict = None,
-            raise_on_error: bool = True,
+        self,
+        endpoint: str,
+        query: Dict = None,
+        body: Dict = None,
+        raise_on_error: bool = True,
     ) -> requests.Response:
         return self.make_request(
             endpoint,
@@ -102,11 +108,11 @@ class APIClientBase:
         )
 
     def patch(
-            self,
-            endpoint: str,
-            query: Dict = None,
-            body: Dict = None,
-            raise_on_error: bool = True,
+        self,
+        endpoint: str,
+        query: Dict = None,
+        body: Dict = None,
+        raise_on_error: bool = True,
     ) -> requests.Response:
         return self.make_request(
             endpoint,
@@ -117,11 +123,11 @@ class APIClientBase:
         )
 
     def put(
-            self,
-            endpoint: str,
-            query: Dict = None,
-            body: Dict = None,
-            raise_on_error: bool = True,
+        self,
+        endpoint: str,
+        query: Dict = None,
+        body: Dict = None,
+        raise_on_error: bool = True,
     ) -> requests.Response:
         return self.make_request(
             endpoint,
@@ -132,11 +138,11 @@ class APIClientBase:
         )
 
     def delete(
-            self,
-            endpoint: str,
-            query: Dict = None,
-            body: Dict = None,
-            raise_on_error: bool = True,
+        self,
+        endpoint: str,
+        query: Dict = None,
+        body: Dict = None,
+        raise_on_error: bool = True,
     ) -> requests.Response:
         return self.make_request(
             endpoint,

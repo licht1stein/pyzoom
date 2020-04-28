@@ -12,6 +12,7 @@ class MyZoomBase(BaseModel):
 
     def pprint(self):
         from pprint import pprint
+
         pprint(self.dict())
 
 
@@ -26,8 +27,8 @@ class ZoomMeetingSettings(MyZoomBase):
     use_pmi: bool
     approval_type: Literal[0, 1, 2]
     registration_type: Optional[Literal[1, 2, 3]]
-    audio: Literal['voip', 'telephony', 'both']
-    auto_recording: Literal['local', 'cloud', 'none']
+    audio: Literal["voip", "telephony", "both"]
+    auto_recording: Literal["local", "cloud", "none"]
     enforce_login: bool
     enforce_login_domains: Optional[str]
     alternative_hosts: Optional[str]
@@ -54,14 +55,14 @@ class ZoomMeetingSettings(MyZoomBase):
             watermark=False,
             use_pmi=False,
             registration_type=1,
-            audio='voip',
-            auto_recording='none',
+            audio="voip",
+            auto_recording="none",
             enforce_login=True,
             waiting_room=False,
             registrants_email_notification=False,
             meeting_authentication=True,
             contact_name="UFY",
-            contact_email="ufyit@support.com"
+            contact_email="ufyit@support.com",
         )
 
 
