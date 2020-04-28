@@ -64,7 +64,7 @@ client.meetings.add_meeting_registrant(meeting.id, first_name='John', last_name=
 You can use `client.meetings.add_and_confirm_registrant` to also confirm auto added
 registrants to a closed meeting.
 
-#### Raw API methods
+### Raw API methods
 
 You can also use the library for making raw requests to the API:
 
