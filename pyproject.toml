@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "pyzoom"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python wrapper for Zoom Video API"
-authors = ["Mikhail Beliansky <mb@blaster.ai>"]
+authors = ["MB <mb@blaster.ai>"]
+license = "MIT"
+readme='README.md'
+homepage='https://github.com/licht1stein/pyzoom'
 
 [tool.poetry.dependencies]
 python = "^3.7"
