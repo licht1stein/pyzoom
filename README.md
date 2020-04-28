@@ -1,3 +1,5 @@
+![Zoom Logo](./ZoomLogo.png)
+
 # Python wrapper for Zoom API
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyzoom)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
