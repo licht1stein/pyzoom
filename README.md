@@ -74,3 +74,6 @@ response = client.raw.get('/me')
 result_dict = client.raw.get_all_pages('/past_meetings/{meetingUUID}/participants')
 ```
 
+### Disclaimer
+This library is not related to Zoom Video Communications, Inc. It's an open-source project that 
+aims to simplify working with this suddenly very popular service.
