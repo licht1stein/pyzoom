@@ -4,6 +4,7 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyzoom)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI](https://img.shields.io/pypi/v/pyzoom)](https://pypi.org/project/pyzoom/)
+![PyPI - License](https://img.shields.io/pypi/l/pyzoom)
 
 This library is work in progress, and that includes documentation. Not all of the implemented methods are documented here,
 so please explore the `ZoomClient` class.
@@ -73,6 +74,17 @@ response = client.raw.get('/me')
 # Get all pages of meeting participants
 result_dict = client.raw.get_all_pages('/past_meetings/{meetingUUID}/participants')
 ```
+
+### Packaging notice
+This project uses the excellent [poetry](https://python-poetry.org) for packaging. Please read about it and let's all start using
+`pyproject.toml` files as a standard. Read more:
+
+* [PEP 518 -- Specifying Minimum Build System Requirements for Python Projects](https://www.python.org/dev/peps/pep-0518/)
+
+* [What the heck is pyproject.toml?](https://snarky.ca/what-the-heck-is-pyproject-toml/)
+
+* [Clarifying PEP 518 (a.k.a. pyproject.toml)](https://snarky.ca/clarifying-pep-518/)
+
 
 ### Disclaimer
 This library is not related to Zoom Video Communications, Inc. It's an open-source project that 
