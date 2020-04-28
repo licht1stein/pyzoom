@@ -1,4 +1,4 @@
-![Zoom Logo](./ZoomLogo.png)
+![Zoom Logo](https://d24cgw3uvb9a9h.cloudfront.net/static/93946/image/new/ZoomLogo.png)
 
 # Python wrapper for Zoom API
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyzoom)
