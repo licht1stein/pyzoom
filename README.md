@@ -1,9 +1,14 @@
 # Python wrapper for Zoom API
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyzoom)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PyPI](https://img.shields.io/pypi/v/pyzoom)](https://pypi.org/project/pyzoom/)
 
 This library is work in progress, and that includes documentation. Not all of the implemented methods are documented here,
 so please explore the `ZoomClient` class.
 
-
+Links:
+* [Api Reference](https://marketplace.zoom.us/docs/api-reference)
+* [Using Zoom API](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis)
 
 ## Installation
 
@@ -66,3 +71,4 @@ response = client.raw.get('/me')
 # Get all pages of meeting participants
 result_dict = client.raw.get_all_pages('/past_meetings/{meetingUUID}/participants')
 ```
+
