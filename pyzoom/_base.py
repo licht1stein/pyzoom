@@ -4,16 +4,16 @@ from typing import Dict
 
 import jwt
 import requests
-from attr import attr
+import attr
 from typing_extensions import Literal
 
-from . import err
+from pyzoom import err
 
 
 @attr.s
 class APIClientBase:
-    api_key: str
-    api_secret: str
+    api_key: str = attr.ib(repr=False)
+    api_secret: str = attr.ib(repr=False)
 
     name = 'zoom_api_client'
     user_id: str = 'me'
@@ -73,6 +73,18 @@ class APIClientBase:
         return self.make_request(
             endpoint, method="GET", query=query, raise_on_error=raise_on_error
         )
+
+    def get_all_pages(self, endpoint: str, query: Dict = None, raise_on_error: bool = True) -> Dict:
+        res = self.get(endpoint, query=query, raise_on_error=raise_on_error).json()
+        next_page_token = res.get('next_page_token')
+        while next_page_token:
+            next_page_res = self.get(endpoint, query={'next_page_token': next_page_token}, raise_on_error=raise_on_error).json()
+            next_page_token = next_page_res.get('next_page_token')
+            for k, v in next_page_res.items():
+                if isinstance(v, list):
+                    res[k].extend(v)
+        res['next_page_token'] = next_page_token
+        return res
 
     def post(
             self,
