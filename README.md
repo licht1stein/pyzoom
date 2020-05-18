@@ -5,6 +5,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![PyPI](https://img.shields.io/pypi/v/pyzoom)](https://pypi.org/project/pyzoom/)
 ![PyPI - License](https://img.shields.io/pypi/l/pyzoom)
+![PyPI - Downloads](https://img.shields.io/pypi/dw/pyzoom)
+[![](https://img.shields.io/badge/Support-Buy_coffee!-Orange)](https://www.buymeacoffee.com/licht1stein)
 
 This library is work in progress, and that includes documentation. Not all of the implemented methods are documented here,
 so please explore the `ZoomClient` class.
@@ -90,6 +92,10 @@ This project uses the excellent [poetry](https://python-poetry.org) for packagin
 
 * [Clarifying PEP 518 (a.k.a. pyproject.toml)](https://snarky.ca/clarifying-pep-518/)
 
+
+### Support
+
+<a href="https://www.buymeacoffee.com/licht1stein" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 130px !important;" ></a>
 
 ### Disclaimer
 This library is not related to Zoom Video Communications, Inc. It's an open-source project that 
