@@ -10,7 +10,7 @@ homepage='https://github.com/licht1stein/pyzoom'
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.23.0"
-attrs = "^19.3.0"
+attrs = ">=19.3,<21.0"
 pyjwt = "^1.7.1"
 typing-extensions = "^3.7.4"
 pydantic = "^1.5.1"
