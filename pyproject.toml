@@ -18,7 +18,7 @@ cachetools = "^4.1.0"
 shortuuid = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.1"
 black = "^19.10b0"
 python-dotenv = "^0.13.0"
 
