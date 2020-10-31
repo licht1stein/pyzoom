@@ -83,7 +83,7 @@ class ZoomMeeting(ZoomMeetingShort):
     status: str
     agenda: Optional[str]
     start_url: str
-    registration_url: str
+    registration_url: Optional[str]
     password: str
     h323_password: str
     pstn_password: str
