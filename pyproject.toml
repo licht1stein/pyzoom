@@ -19,7 +19,7 @@ shortuuid = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
-black = "^21.4b2"
+black = "^21.6b0"
 python-dotenv = "^0.17.0"
 
 [build-system]
