@@ -2,3 +2,6 @@
 *.xml
 dist/
 .env
+__pycache__/
+*#
+*~
