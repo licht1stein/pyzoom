@@ -161,4 +161,4 @@ class APIClientBase:
         token = jwt.encode(payload, secret, algorithm="HS256", headers=header)
 
         # Compatibility between different versions of pyjwt (2.1.0 returns str).
-        return if isinstance(token, str) else token.decode("utf-8")
+        return token if isinstance(token, str) else token.decode("utf-8")
