@@ -159,4 +159,6 @@ class APIClientBase:
         payload = {"iss": key, "exp": int(time.time() + 3600)}
 
         token = jwt.encode(payload, secret, algorithm="HS256", headers=header)
-        return token.decode("utf-8")
+
+        # Compatibility between different versions of pyjwt (2.1.0 returns str).
+        return token if isinstance(token, str) else token.decode("utf-8")
