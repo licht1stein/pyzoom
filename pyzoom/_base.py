@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 import logging
 import time
 from typing import Dict
@@ -46,13 +47,18 @@ class APIClientBase:
             return r
 
         try:
-            message = r.json()["_error"]["message"]
-        except KeyError:
-            message = r.json()
+            body = r.json()
+            try:
+                message = body["_error"]["message"]
+            except KeyError:
+                message = body
+        except JSONDecodeError:
+            body = r.text
+            message = body
 
         logging.error(f"Unsuccessful request to {r.url}: [{r.status_code}] {message}")
 
-        logging.debug(f"Full response: {r.json()}")
+        logging.debug(f"Full response: {body}")
         logging.debug(f"Headers: {r.headers}")
         logging.debug(f"Params: {query}")
         logging.debug(f"Body: {body}")
