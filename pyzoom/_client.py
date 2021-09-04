@@ -23,7 +23,10 @@ class MeetingsComponent:
     def get_meeting(self, meeting_id: int) -> schemas.ZoomMeeting:
         endpoint = f"/meetings/{meeting_id}"
         return schemas.ZoomMeeting(**self._client.get(endpoint).json())
-
+    """
+    LineNumber:49 can be without Conversion to dict. Which may give user 
+    an advantage to pass dictionary while creating the meeting in parameter 'settings'.
+    """
     def create_meeting(
         self,
         topic: str,
@@ -49,6 +52,39 @@ class MeetingsComponent:
         }
         response = self._client.post(endpoint, body=body)
         return schemas.ZoomMeeting(**response.json())
+
+    """
+    UpdateMeeting Should be passed with same parameters as create_meeting but
+    meeting_id is an additional requirement when we wish to modify the meeting.
+    In the return from we get a StatusCode and empty dictionary.
+    """
+
+    def update_meeting(
+        self,
+        topic: str,
+        *,
+        start_time: str,
+        duration_min: int,
+        timezone: str = None,
+        type_: int = 2,
+        password: str = None,
+        settings: schemas.ZoomMeetingSettings = None,
+        meeting_id: int,
+    ) -> schemas.ZoomMeeting:
+        endpoint = f"/meetings/{meeting_id}"
+        body = {
+            "topic": topic,
+            "type": type_,
+            "start_time": start_time,
+            "duration": duration_min,
+            "timezone": timezone or self.timezone,
+            "password": password or shortuuid.random(6),
+            "settings": settings.dict() 
+            if settings
+            else schemas.ZoomMeetingSettings.default_settings().dict(),
+        }
+        response = self._client.patch(endpoint, body=body)
+        return {}
 
     def delete_meeting(self, meeting_id: int) -> bool:
         endpoint = f"/meetings/{meeting_id}"
