@@ -49,7 +49,7 @@ client = ZoomClient.from_environment()
 
 ### Meetings
 
-#### Create meeting and add registrant
+#### Create meeting, Update meeting and add registrant
 ```python
 from pyzoom import ZoomClient
 from datetime import datetime as dt
