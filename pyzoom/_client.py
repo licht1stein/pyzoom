@@ -163,6 +163,26 @@ class MeetingsComponent:
         endpoint = f"/past_meetings/{meeting_id}/participants"
         return schemas.MeetingParticipantList(**self._client.get_all_pages(endpoint))
 
+@attr.s
+class UsersComponent:
+    _client: APIClientBase = attr.ib(repr=False)
+
+    def get_users(
+        self, status: str
+    ) -> schemas.ZoomUserList:
+        endpoint = f"/users"
+        query={
+                "status": status,
+        }
+        return schemas.ZoomUserList(**self._client.get_all_pages(endpoint, query))
+
+    def delete_user(self, user_id: int, ) -> bool:
+        endpoint = f"/users/{user_id}"
+        query={
+            "action": "delete"
+        }
+        r = self._client.delete(endpoint, query)
+        return r.status_code == 204
 
 @attr.s(auto_attribs=True)
 class ZoomClient:
@@ -171,12 +191,14 @@ class ZoomClient:
 
     raw: APIClientBase = attr.ib(init=False, repr=False)
     meetings: MeetingsComponent = attr.ib(init=False, repr=False)
+    users: UsersComponent = attr.ib(init=False, repr=False)
 
     def __attrs_post_init__(self):
         self.raw: APIClientBase = APIClientBase(
             api_key=self.api_key, api_secret=self.api_secret
         )
         self.meetings: MeetingsComponent = MeetingsComponent(self.raw)
+        self.users: UsersComponent = UsersComponent(self.raw)
 
     @classmethod
     def from_environment(cls) -> ZoomClient:

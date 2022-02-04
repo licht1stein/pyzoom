@@ -171,3 +171,28 @@ class MeetingParticipantList(MyZoomBase):
 
     def find_by_name(self, name):
         return [i for i in self.participants if i.name == name]
+
+class ZoomUser(MyZoomBase):
+    id: str
+    first_name: str
+    last_name: str
+    email: str
+    type: int
+    pmi: int
+    timezone: Optional[str]
+    verified: int
+    dept: Optional[str]
+    created_at: str
+    pic_url: Optional[str]
+    group_ids: Optional[List[str]]
+    language: Optional[str]
+    phone_number: Optional[str]
+    status: str
+    role_id: str
+
+class ZoomUserList(MyZoomBase):
+    page_count: int
+    page_number: int
+    page_size: int
+    total_records: int
+    users: List[ZoomUser]
