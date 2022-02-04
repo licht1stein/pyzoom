@@ -21,7 +21,7 @@ Using pip:
 
 `pip install -U pyzoom`
 
-Using [poetry](https://https://python-poetry.org/):
+Using [poetry](https://python-poetry.org/):
 
 `poetry add pyzoom`
 
