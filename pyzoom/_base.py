@@ -15,10 +15,10 @@ from pyzoom import err
 class APIClientBase:
     api_key: str = attr.ib(repr=False)
     api_secret: str = attr.ib(repr=False)
+    base_url: str = attr.ib(repr=False, default="https://api.zoom.us/v2")
 
     name = "zoom_api_client"
     user_id: str = "me"
-    base_url: str = "https://api.zoom.us/v2"
 
     def bearer_token(self) -> str:
         return self.generate_jwt(self.api_key, self.api_secret)

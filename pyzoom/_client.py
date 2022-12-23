@@ -188,6 +188,7 @@ class UsersComponent:
 class ZoomClient:
     api_key: str = attr.ib(repr=False)
     api_secret: str = attr.ib(repr=False)
+    base_url: str = attr.ib(repr=False, default="https://api.zoom.us/v2")
 
     raw: APIClientBase = attr.ib(init=False, repr=False)
     meetings: MeetingsComponent = attr.ib(init=False, repr=False)
@@ -195,7 +196,7 @@ class ZoomClient:
 
     def __attrs_post_init__(self):
         self.raw: APIClientBase = APIClientBase(
-            api_key=self.api_key, api_secret=self.api_secret
+            api_key=self.api_key, api_secret=self.api_secret, base_url=self.base_url
         )
         self.meetings: MeetingsComponent = MeetingsComponent(self.raw)
         self.users: UsersComponent = UsersComponent(self.raw)

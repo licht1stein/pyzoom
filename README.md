@@ -35,6 +35,12 @@ from pyzoom import ZoomClient
 client = ZoomClient('YOUR_ZOOM_API_KEY', 'YOUR_ZOOM_API_SECRET')
 ```
 
+Optionally you can specify a different base URL either upon instantiation or any time later:
+
+```python
+client = ZoomClient ('YOU_ZOOM_API_KEY', 'YOUR_ZOOM_API_SECRET', base_url="https://api.zoomgov.us/v2")
+```
+
 ### Instantiation from environment variables
 
 You can also create an instance of client when storing your key and secret in environment variables `ZOOM_API_KEY` 
