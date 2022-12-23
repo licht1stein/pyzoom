@@ -1,10 +1,6 @@
 [tool.poetry]
 name = "pyzoom"
-<<<<<<< HEAD
-version = "0.1.14"
-=======
 version = "0.1.15"
->>>>>>> 8300039093c5b4bad7305d87c2af2181470db9ac
 description = "Python wrapper for Zoom Video API"
 authors = ["MB <mb@blaster.ai>"]
 license = "MIT"
