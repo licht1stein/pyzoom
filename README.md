@@ -70,7 +70,7 @@ client = ZoomClient ('YOU_ZOOM_ACCCESS_TOKEN', base_url="https://api.zoomgov.us/
 
 ### Instantiation from environment variables
 
-You can also create an instance of client when access key in environment variables `ZOOM_ACCESS_TOIKEN`. *Since the access token expires after one hour, this method is not a good idea any more.*
+You can also create an instance of client when access key in environment variables `ZOOM_ACCESS_TOKEN`. *Since the access token expires after one hour, this method is not a good idea any more.*
 
 ```python
 from pyzoom import ZoomClient
