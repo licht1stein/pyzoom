@@ -30,6 +30,18 @@ Using [poetry](https://python-poetry.org/):
 
 `poetry add pyzoom`
 
+## OAUTH Authorization
+I have provided some functions to ease the flow of getting all the tokens. You will need your Zoom App's `Client ID` and `Client Secret`.
+
+### Refreshing tokens
+
+```python
+from pyzoom import refresh_tokens
+
+tokens = refresh_tokens("APP_CLIEN_ID", "APP_CLIENT_SECRET", "USER_REFRESH_TOKEN")
+```
+The result of a successful request will be a map with the new tokens. Remember, that the refresh token will also be updated, which will invalidate the token you just used. 
+
 ## Usage
 
 ### Basic instantiation:
