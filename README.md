@@ -13,8 +13,8 @@ Also the project now uses [break versioning](https://github.com/ptaoussanis/enco
 [![](https://img.shields.io/badge/Support-Buy_coffee!-Orange)](https://www.buymeacoffee.com/licht1stein)
 
 
-This library is work in progress, and that includes documentation. Not all of the implemented methods are documented here,
-so please explore the `ZoomClient` class.
+**This library requires contributors and maintainers since Python stopped being my primary language a couple of years ago.**
+I do use it in some of my older projects, so I have to update it from time to time.
 
 Links:
 * [Api Reference](https://marketplace.zoom.us/docs/api-reference)
@@ -88,7 +88,7 @@ from pyzoom import ZoomClient
 client = ZoomClient.from_environment()
 
 # Get self
-response = client.raw.get('/me')
+response = client.raw.get('/users/me')
 
 # Get all pages of meeting participants
 result_dict = client.raw.get_all_pages('/past_meetings/{meetingUUID}/participants')
