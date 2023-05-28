@@ -1,5 +1,9 @@
 ![Zoom Logo](https://d24cgw3uvb9a9h.cloudfront.net/static/93946/image/new/ZoomLogo.png)
 
+**WARNING: Version 1.0.0 introduces breaking change. The library now only supports OAUTH tokens, since Zoom is deprecating the JWT support as of June 1, 2023**
+
+Also the project now uses [break versioning](https://github.com/ptaoussanis/encore/blob/master/BREAK-VERSIONING.md), meaning that upgrading from 1.0.x to 1.0.y will always be safe, upgrade to 1.x.x might break something small, and upgrade to 2.x.x will break almost everything. That was a versioning spec in one sentence, by the way.
+
 # Python wrapper for Zoom API
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pyzoom)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -7,6 +11,7 @@
 ![PyPI - License](https://img.shields.io/pypi/l/pyzoom)
 ![PyPI - Downloads](https://img.shields.io/pypi/dw/pyzoom)
 [![](https://img.shields.io/badge/Support-Buy_coffee!-Orange)](https://www.buymeacoffee.com/licht1stein)
+
 
 This library is work in progress, and that includes documentation. Not all of the implemented methods are documented here,
 so please explore the `ZoomClient` class.
@@ -32,19 +37,18 @@ Using [poetry](https://python-poetry.org/):
 ```python
 from pyzoom import ZoomClient
 
-client = ZoomClient('YOUR_ZOOM_API_KEY', 'YOUR_ZOOM_API_SECRET')
+client = ZoomClient('YOUR_ZOOM_ACCESS_TOKEN')
 ```
 
 Optionally you can specify a different base URL either upon instantiation or any time later:
 
 ```python
-client = ZoomClient ('YOU_ZOOM_API_KEY', 'YOUR_ZOOM_API_SECRET', base_url="https://api.zoomgov.us/v2")
+client = ZoomClient ('YOU_ZOOM_ACCCESS_TOKEN', base_url="https://api.zoomgov.us/v2")
 ```
 
 ### Instantiation from environment variables
 
-You can also create an instance of client when storing your key and secret in environment variables `ZOOM_API_KEY` 
-and `ZOOM_API_SECRET`.
+You can also create an instance of client when access key in environment variables `ZOOM_ACCESS_TOIKEN`. *Since the access token expires after one hour, this method is not a good idea any more.*
 
 ```python
 from pyzoom import ZoomClient

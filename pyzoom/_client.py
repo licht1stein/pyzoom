@@ -186,8 +186,8 @@ class UsersComponent:
 
 @attr.s(auto_attribs=True)
 class ZoomClient:
-    api_key: str = attr.ib(repr=False)
-    api_secret: str = attr.ib(repr=False)
+    access_token: str = attr.ib(repr=False)
+    refresh_token: str = attr.ib(repr=False, default=None)
     base_url: str = attr.ib(repr=False, default="https://api.zoom.us/v2")
 
     raw: APIClientBase = attr.ib(init=False, repr=False)
@@ -196,7 +196,9 @@ class ZoomClient:
 
     def __attrs_post_init__(self):
         self.raw: APIClientBase = APIClientBase(
-            api_key=self.api_key, api_secret=self.api_secret, base_url=self.base_url
+            access_token=self.access_token,
+            refresh_token=self.refresh_token,
+            base_url=self.base_url
         )
         self.meetings: MeetingsComponent = MeetingsComponent(self.raw)
         self.users: UsersComponent = UsersComponent(self.raw)
@@ -204,7 +206,7 @@ class ZoomClient:
     @classmethod
     def from_environment(cls) -> ZoomClient:
         env = os.environ
-        return cls(api_key=env["ZOOM_API_KEY"], api_secret=env["ZOOM_API_SECRET"])
+        return cls(access_token=env["ZOOM_ACCESS_TOKEN"], refresh_token=env.get("ZOOM_REFRESH_TOKEN"))
 
     def set_timezone(self, timezone: str):
         self.meetings.timezone = timezone

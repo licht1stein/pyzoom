@@ -13,15 +13,12 @@ from pyzoom import err
 
 @attr.s
 class APIClientBase:
-    api_key: str = attr.ib(repr=False)
-    api_secret: str = attr.ib(repr=False)
+    access_token: str = attr.ib(repr=False)
+    refresh_token: str = attr.ib(repr=False)
     base_url: str = attr.ib(repr=False, default="https://api.zoom.us/v2")
 
     name = "zoom_api_client"
     user_id: str = "me"
-
-    def bearer_token(self) -> str:
-        return self.generate_jwt(self.api_key, self.api_secret)
 
     def make_request(
         self,
@@ -36,7 +33,7 @@ class APIClientBase:
             raise ValueError(
                 f'Invalid method: {method}. Must be one of {", ".join(allowed_methods)}'
             )
-        headers = {"Authorization": f"Bearer {self.bearer_token()}"}
+        headers = {"Authorization": f"Bearer {self.access_token}"}
         url = self.base_url + endpoint
         logging.debug(f"Making {method} request to {endpoint}")
         session = requests.Session()
@@ -157,14 +154,3 @@ class APIClientBase:
             body=body,
             raise_on_error=raise_on_error,
         )
-
-    @staticmethod
-    def generate_jwt(key, secret):
-        header = {"alg": "HS256", "typ": "JWT"}
-
-        payload = {"iss": key, "exp": int(time.time() + 3600)}
-
-        token = jwt.encode(payload, secret, algorithm="HS256", headers=header)
-
-        # Compatibility between different versions of pyjwt (2.1.0 returns str).
-        return token if isinstance(token, str) else token.decode("utf-8")
