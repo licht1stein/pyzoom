@@ -48,7 +48,13 @@ python -c "from pyzoom import oauth_wizard; oauth_wizard()"
 ```
 
 
-This will launch the wizard in interactive mode, asking for input of your client id and secret, and will print the credentials after everything is done.
+This will launch the wizard in interactive mode:
+- asking for input of your client id and secret
+- starting the web server to capture callback code 
+- opening the browser for you to authorize on Zoom
+- capture the incoming code and run `request_tokens` with it
+
+As the result it will print the credentials (if all was ok).
 
 No external libraries were used to start the server and capture the code, only what's built into python.
 
