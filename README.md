@@ -37,7 +37,7 @@ I have provided some functions to ease the flow of getting all the tokens. You w
 Once your user has accepted integration on the zoom side and you received the code from the redirect:
 
 ```python
-from pyzoom import reqeust_tokens
+from pyzoom import request_tokens
 
 tokens = request_tokens("APP_CLIENT_ID", "APP_CLIENT_SECRET", "APP_REDIRECT_URL", "CALLBACK_CODE"):
 ```
