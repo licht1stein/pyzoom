@@ -33,6 +33,8 @@ Using [poetry](https://python-poetry.org/):
 ## OAUTH Authorization
 I have provided some functions to ease the flow of getting all the tokens. You will need your Zoom App's `Client ID` and `Client Secret`.
 
+You can find out more details by reading the docstrings of `request_tokens` and `refresh_tokens`. And remember, the library does not handle the first step for you, namely capturing the redirect.
+
 ### Requesting Tokens
 Once your user has accepted integration on the zoom side and you received the code from the redirect:
 
