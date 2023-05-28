@@ -65,5 +65,5 @@ def request_tokens(client_id, client_secret, redirect_uri, callback_code):
     Response: The response from the Zoom API, typically containing access and refresh tokens in the JSON body.
     """
     headers = _make_headers(client_id, client_secret)
-    data = {"code": code, "redirect_uri": redirect_uri, "grant_type": "authorization_code"}
+    data = {"code": callback_code, "redirect_uri": redirect_uri, "grant_type": "authorization_code"}
     return _oauth_request(headers, data)
