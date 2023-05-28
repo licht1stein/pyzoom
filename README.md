@@ -30,10 +30,23 @@ Using [poetry](https://python-poetry.org/):
 
 `poetry add pyzoom`
 
-## OAUTH Authorization
-I have provided some functions to ease the flow of getting all the tokens. You will need your Zoom App's `Client ID` and `Client Secret`.
+## OAUTH Authorization Wizard
+`pyzoom` can handle the entire oauth flow for you. Yes, including starting a web server to receive the callback. And you can use it eiter interactively from the terminal, or from within the code. To run from code:
 
-You can find out more details by reading the docstrings of `request_tokens` and `refresh_tokens`. And remember, the library does not handle the first step for you, namely creating the redirect URL and capturing the code from the redirect.
+```python
+from pyzoom import oauth_wizard
+
+tokens = oauth_wizard("APP_CLIENT_ID", "APP_CLIENT_SECRET")
+```
+
+To run from terminal (in your virtual environment):
+
+```sh
+python -c "from pyzoom import oauth_wizard; oauth_wizard()"
+```
+
+
+This will launch the wizard in interactive mode, asking for input of your client id and secret, and will print the credentials after everything is done.
 
 ### Requesting Tokens
 Once your user has accepted integration on the zoom side and you received the code from the redirect:

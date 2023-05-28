@@ -3,7 +3,6 @@ import logging
 import time
 from typing import Dict
 
-import jwt
 import requests
 import attr
 from typing_extensions import Literal

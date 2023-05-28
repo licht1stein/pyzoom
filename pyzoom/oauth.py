@@ -2,6 +2,12 @@ import base64
 import requests
 from pyzoom import err
 
+import http.server
+import webbrowser
+from urllib.parse import urlparse, parse_qs, quote
+
+from getpass import getpass
+
 
 def _make_headers(client_id: str, client_secret: str) -> dict:
     """
@@ -93,3 +99,61 @@ def request_tokens(client_id, client_secret, redirect_uri, callback_code):
         "grant_type": "authorization_code",
     }
     return _oauth_request(headers, data)
+
+
+def oauth_wizard(client_id=None, client_secret=None, port=3000, redirect_uri=None):
+    """
+    Start a simple HTTP server for capturing the OAuth redirect URI and do everything else to authorize.
+
+    Parameters:
+    port (int): The port to start the server on.
+    client_id (str): The client ID for your Zoom app.
+    redirect_uri (str): The redirect URI specified in your Zoom app settings.
+
+    Returns:
+    str: The authorization code captured from the redirect URI.
+    """
+    if not client_id:
+        print("Welcome to interactive pyzoom oauth wizard!\n")
+        client_id = getpass("Client ID: ")
+
+    if not client_secret:
+        client_secret = getpass("Client Secret: ")
+
+    class RequestHandler(http.server.SimpleHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.end_headers()
+
+            query = urlparse(self.path).query
+            params = parse_qs(query)
+            if "code" in params:
+                self.server.authorization_code = params["code"][0]
+
+            self.wfile.write(b"You can close this page.")
+
+    redirect_uri = redirect_uri or f"http://localhost:{port}/integrations/zoom"
+    redirect_uri_encoded = quote(redirect_uri, safe="")
+    server_address = ("", port)
+
+    url = f"https://zoom.us/oauth/authorize?response_type=code&client_id={quote(client_id)}&redirect_uri={redirect_uri_encoded}"
+    input(
+        f"Press enter to start a callback server and open Zoom oauth page in your default browser..."
+    )
+    webbrowser.open(url)
+
+    print(f"Starting callback server on {redirect_uri}")
+    httpd = http.server.HTTPServer(server_address, RequestHandler)
+    httpd.handle_request()
+
+    code = httpd.authorization_code
+    if not client_secret:
+        return code
+
+    result = request_tokens(client_id, client_secret, redirect_uri, code)
+    print(result)
+    return result
+
+
+if __name__ == "__main__":
+    oauth_wizard()
