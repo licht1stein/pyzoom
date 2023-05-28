@@ -2,6 +2,8 @@
 
 **WARNING: Version 1.0.0 introduces breaking change. The library now only supports OAUTH tokens, since Zoom is deprecating the JWT support as of June 1, 2023**
 
+On the bright side, `pyzoom` can handle the entire OAUTH flow for you! 
+
 Also the project now uses [break versioning](https://github.com/ptaoussanis/encore/blob/master/BREAK-VERSIONING.md), meaning that upgrading from 1.0.x to 1.0.y will always be safe, upgrade to 1.y.0 might break something small, and upgrade to y.0.0. will break almost everything. That was a versioning spec in one sentence, by the way.
 
 # Python wrapper for Zoom API
