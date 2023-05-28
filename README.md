@@ -52,7 +52,7 @@ This will launch the wizard in interactive mode:
 - asking for input of your client id and secret
 - starting the web server to capture callback code 
 - opening the browser for you to authorize on Zoom
-- capture the incoming code and run `request_tokens` with it
+- capturing the incoming code and running `request_tokens` with it
 
 As the result it will print the credentials (if all was ok).
 
