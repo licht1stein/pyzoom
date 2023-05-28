@@ -14,15 +14,15 @@ def _make_headers(client_id: str, client_secret: str) -> dict:
     dict: A dictionary with 'headers' and 'data' suitable for a POST request.
     """
     headers = {
-        "Authorization": "Basic " + base64.b64encode(f"{client_id}:{client_secret}".encode()).decode(),
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Authorization": "Basic "
+        + base64.b64encode(f"{client_id}:{client_secret}".encode()).decode(),
+        "Content-Type": "application/x-www-form-urlencoded",
     }
     return headers
 
+
 def _oauth_request(headers, data):
-    response = requests.post("https://zoom.us/oauth/token",
-                         headers=headers,
-                         data=data)
+    response = requests.post("https://zoom.us/oauth/token", headers=headers, data=data)
 
     if response.status_code == 200:
         return response.json()
@@ -65,5 +65,9 @@ def request_tokens(client_id, client_secret, redirect_uri, callback_code):
     Response: The response from the Zoom API, typically containing access and refresh tokens in the JSON body.
     """
     headers = _make_headers(client_id, client_secret)
-    data = {"code": callback_code, "redirect_uri": redirect_uri, "grant_type": "authorization_code"}
+    data = {
+        "code": callback_code,
+        "redirect_uri": redirect_uri,
+        "grant_type": "authorization_code",
+    }
     return _oauth_request(headers, data)

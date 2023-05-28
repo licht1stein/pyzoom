@@ -23,10 +23,12 @@ class MeetingsComponent:
     def get_meeting(self, meeting_id: int) -> schemas.ZoomMeeting:
         endpoint = f"/meetings/{meeting_id}"
         return schemas.ZoomMeeting(**self._client.get(endpoint).json())
+
     """
     LineNumber:49 can be without Conversion to dict. Which may give user 
     an advantage to pass dictionary while creating the meeting in parameter 'settings'.
     """
+
     def create_meeting(
         self,
         topic: str,
@@ -79,7 +81,7 @@ class MeetingsComponent:
             "duration": duration_min,
             "timezone": timezone or self.timezone,
             "password": password or shortuuid.random(6),
-            "settings": settings.dict() 
+            "settings": settings.dict()
             if settings
             else schemas.ZoomMeetingSettings.default_settings().dict(),
         }
@@ -163,26 +165,27 @@ class MeetingsComponent:
         endpoint = f"/past_meetings/{meeting_id}/participants"
         return schemas.MeetingParticipantList(**self._client.get_all_pages(endpoint))
 
+
 @attr.s
 class UsersComponent:
     _client: APIClientBase = attr.ib(repr=False)
 
-    def get_users(
-        self, status: str
-    ) -> schemas.ZoomUserList:
+    def get_users(self, status: str) -> schemas.ZoomUserList:
         endpoint = f"/users"
-        query={
-                "status": status,
+        query = {
+            "status": status,
         }
         return schemas.ZoomUserList(**self._client.get_all_pages(endpoint, query))
 
-    def delete_user(self, user_id: int, ) -> bool:
+    def delete_user(
+        self,
+        user_id: int,
+    ) -> bool:
         endpoint = f"/users/{user_id}"
-        query={
-            "action": "delete"
-        }
+        query = {"action": "delete"}
         r = self._client.delete(endpoint, query)
         return r.status_code == 204
+
 
 @attr.s(auto_attribs=True)
 class ZoomClient:
@@ -198,7 +201,7 @@ class ZoomClient:
         self.raw: APIClientBase = APIClientBase(
             access_token=self.access_token,
             refresh_token=self.refresh_token,
-            base_url=self.base_url
+            base_url=self.base_url,
         )
         self.meetings: MeetingsComponent = MeetingsComponent(self.raw)
         self.users: UsersComponent = UsersComponent(self.raw)
@@ -206,7 +209,10 @@ class ZoomClient:
     @classmethod
     def from_environment(cls) -> ZoomClient:
         env = os.environ
-        return cls(access_token=env["ZOOM_ACCESS_TOKEN"], refresh_token=env.get("ZOOM_REFRESH_TOKEN"))
+        return cls(
+            access_token=env["ZOOM_ACCESS_TOKEN"],
+            refresh_token=env.get("ZOOM_REFRESH_TOKEN"),
+        )
 
     def set_timezone(self, timezone: str):
         self.meetings.timezone = timezone
