@@ -5,13 +5,17 @@ from pyzoom import err
 
 def _make_headers(client_id: str, client_secret: str) -> dict:
     """
-    Prepare the payload for a refresh token POST request.
+    Prepare the headers for an OAuth request to the Zoom API.
+
+    This function accepts client_id and client_secret and returns a dictionary of headers that includes these
+    credentials, encoded for HTTP Basic Authentication.
 
     Parameters:
-    data (dict): A dictionary with 'client_id', 'client_secret', and 'refresh-token'.
+    client_id (str): The client ID for your Zoom app.
+    client_secret (str): The client secret for your Zoom app.
 
     Returns:
-    dict: A dictionary with 'headers' and 'data' suitable for a POST request.
+    dict: A dictionary containing the Authorization and Content-Type headers required for an OAuth request.
     """
     headers = {
         "Authorization": "Basic "
@@ -22,6 +26,21 @@ def _make_headers(client_id: str, client_secret: str) -> dict:
 
 
 def _oauth_request(headers, data):
+    """
+    Send an OAuth token request to the Zoom API.
+
+    This function makes a POST request to the Zoom API's OAuth endpoint, sending the provided headers and data.
+
+    Parameters:
+    headers (dict): The headers for the request, including Authorization and Content-Type.
+    data (dict): The body of the request, typically including 'grant_type' and a 'refresh_token', 'code', or other parameters.
+
+    Returns:
+    dict: The JSON response from the Zoom API, typically containing 'access_token' and 'refresh_token'.
+
+    Raises:
+    APIError: If the request does not return a 200 status code, raises an APIError with a message indicating the failure to refresh tokens.
+    """
     response = requests.post("https://zoom.us/oauth/token", headers=headers, data=data)
 
     if response.status_code == 200:
@@ -33,13 +52,15 @@ def refresh_tokens(client_id: str, client_secret: str, refresh_token: str):
     """
     Refresh OAuth tokens using client credentials and a refresh token.
 
+    This function makes a request to the Zoom API to refresh the access and refresh tokens.
+
     Parameters:
-    client_id (str): The client ID for the authorization.
-    client_secret (str): The client secret for the authorization.
-    refresh_token (str): The refresh token for obtaining new tokens.
+    client_id (str): The client ID for your Zoom app.
+    client_secret (str): The client secret for your Zoom app.
+    refresh_token (str): The current refresh token for the user.
 
     Returns:
-    Response: The response from the token refresh request.
+    dict: The JSON response from the Zoom API, typically containing 'access_token' and 'refresh_token'.
     """
     headers = _make_headers(client_id, client_secret)
     data = {"refresh_token": refresh_token, "grant_type": "refresh_token"}
@@ -56,13 +77,14 @@ def request_tokens(client_id, client_secret, redirect_uri, callback_code):
     redirect URI, to request access and refresh tokens from the Zoom API.
 
     Parameters:
-    client_id (str): The client ID for the application, obtained from your Zoom App Dashboard.
-    client_secret (str): The client secret for the application, also obtained from your Zoom App Dashboard.
-    redirect_uri (str): The redirect URI specified in the initial authorization request and registered in the Zoom App Dashboard.
-    callback_code (str): The authorization code received as a query parameter in the redirect from the Zoom API.
+    client_id (str): The client ID for your Zoom app.
+    client_secret (str): The client secret for your Zoom app.
+    redirect_uri (str): The redirect URI specified in your Zoom app settings and used in the initial authorization request.
+    callback_code (str): The authorization code received in the redirect URI after the user authorized the application.
 
     Returns:
-    Response: The response from the Zoom API, typically containing access and refresh tokens in the JSON body.
+    dict: The JSON response from the Zoom API, typically containing 'access_token' and 'refresh_token'. These tokens are used
+          for accessing and refreshing the user's authorization respectively.
     """
     headers = _make_headers(client_id, client_secret)
     data = {
