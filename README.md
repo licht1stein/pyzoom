@@ -39,7 +39,7 @@ from pyzoom import oauth_wizard
 
 tokens = oauth_wizard("APP_CLIENT_ID", "APP_CLIENT_SECRET")
 ```
-f
+
 To run from terminal (in your virtual environment):
 
 ```sh
