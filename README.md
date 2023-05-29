@@ -72,7 +72,7 @@ The result of a successful request will be a map with the tokens.
 ```python
 from pyzoom import refresh_tokens
 
-tokens = refresh_tokens("APP_CLIEN_ID", "APP_CLIENT_SECRET", "USER_REFRESH_TOKEN")
+tokens = refresh_tokens("APP_CLIENT_ID", "APP_CLIENT_SECRET", "USER_REFRESH_TOKEN")
 ```
 The result of a successful request will be a map with the new tokens. Remember, that the refresh token will also be updated, which will invalidate the token you just used. 
 
