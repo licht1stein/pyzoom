@@ -8,7 +8,7 @@ from typing_extensions import Literal
 
 class MyZoomBase(BaseModel):
     class Config:
-        orm_mode = True
+        from_attributes = True
 
     def pprint(self):
         from pprint import pprint

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyzoom"
-version = "1.0.3"
+version = "1.0.4"
 description = "Python wrapper for Zoom Video API"
 authors = ["MB <mb@blaster.ai>"]
 license = "MIT"
@@ -9,12 +9,12 @@ homepage='https://github.com/licht1stein/pyzoom'
 
 [tool.poetry.dependencies]
 python = "^3.7"
-requests = "^2.23.0"
 attrs = "*"
 typing-extensions = ">=3.7.4,<5.0.0"
-pydantic = "^1.5.1"
 cachetools = ">=4.1,<6.0"
 shortuuid = "^1.0.1"
+pydantic = "^2.4.2"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1"
