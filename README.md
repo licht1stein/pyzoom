@@ -14,9 +14,6 @@
 [![](https://img.shields.io/badge/Support-Buy_coffee!-Orange)](https://www.buymeacoffee.com/licht1stein)
 
 
-**This library requires contributors and maintainers since Python stopped being my primary language a couple of years ago.**
-I do use it in some of my older projects, so I have to update it from time to time.
-
 Links:
 * [Api Reference](https://marketplace.zoom.us/docs/api-reference)
 * [Using Zoom API](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis)
