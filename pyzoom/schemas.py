@@ -72,7 +72,7 @@ class ZoomMeetingShort(MyZoomBase):
     host_id: str
     topic: str
     type: int
-    start_time: str
+    start_time: Optional[str] = None
     duration: int
     timezone: str
     created_at: str
@@ -92,11 +92,12 @@ class ZoomMeeting(ZoomMeetingShort):
 
 
 class ZoomMeetingShortList(MyZoomBase):
-    page_count: int
-    page_number: int
+    page_count: Optional[int] = None
+    page_number: Optional[int] = None
     page_size: int
     total_records: int
     meetings: List[ZoomMeetingShort]
+    next_page_token: Optional[str] = None
 
     def filter_by_topic(self, text: str) -> List[ZoomMeetingShort]:
         return [m for m in self.meetings if text.lower() in m.topic.lower()]
