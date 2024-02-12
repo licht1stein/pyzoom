@@ -51,7 +51,7 @@ def _oauth_request(headers, data):
 
     if response.status_code == 200:
         return response.json()
-    raise err.APIError("Failed to refresh tokens")
+    raise err.APIError(f"Failed to refresh tokens: {response.status_code} {response.text}")
 
 
 def refresh_tokens(client_id: str, client_secret: str, refresh_token: str):
