@@ -30,17 +30,17 @@ class ZoomMeetingSettings(MyZoomBase):
     audio: Literal["voip", "telephony", "both"]
     auto_recording: Literal["local", "cloud", "none"]
     enforce_login: bool
-    enforce_login_domains: Optional[str]
-    alternative_hosts: Optional[str]
-    close_registration: Optional[bool]
+    enforce_login_domains: Optional[str] = None
+    alternative_hosts: Optional[str] = None
+    close_registration: Optional[bool] = None
     waiting_room: bool
-    global_dial_in_countries: Optional[List[str]]
-    contact_name: Optional[str]
-    contact_email: Optional[str]
+    global_dial_in_countries: Optional[List[str]] = None
+    contact_name: Optional[str] = None
+    contact_email: Optional[str] = None
     registrants_email_notification: bool
     meeting_authentication: bool
-    authentication_option: Optional[str]
-    authentication_domains: Optional[str]
+    authentication_option: Optional[str] = None
+    authentication_domains: Optional[str] = None
 
     @classmethod
     def default_settings(cls) -> ZoomMeetingSettings:
@@ -81,9 +81,9 @@ class ZoomMeetingShort(MyZoomBase):
 
 class ZoomMeeting(ZoomMeetingShort):
     status: str
-    agenda: Optional[str]
+    agenda: Optional[str] = None
     start_url: str
-    registration_url: Optional[str]
+    registration_url: Optional[str] = None
     password: str
     h323_password: str
     pstn_password: str
@@ -107,24 +107,24 @@ class ZoomMeetingShortList(MyZoomBase):
 
 
 class MeetingRegistrantShort(MyZoomBase):
-    id: Optional[str]
-    email: Optional[str]
+    id: Optional[str] = None
+    email: Optional[str] = None
 
 
 class MeetingRegistrant(MeetingRegistrantShort):
     email: str
     first_name: str
     last_name: str
-    address: Optional[str]
-    city: Optional[str]
-    country: Optional[str]
-    zip: Optional[str]
-    state: Optional[str]
-    phone: Optional[str]
-    industry: Optional[str]
-    org: Optional[str]
-    job_title: Optional[str]
-    comment: Optional[str]
+    address: Optional[str] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    zip: Optional[str] = None
+    state: Optional[str] = None
+    phone: Optional[str] = None
+    industry: Optional[str] = None
+    org: Optional[str] = None
+    job_title: Optional[str] = None
+    comment: Optional[str] = None
 
 
 class MeetingRegistrantsList(MyZoomBase):
@@ -181,14 +181,14 @@ class ZoomUser(MyZoomBase):
     email: str
     type: int
     pmi: int
-    timezone: Optional[str]
+    timezone: Optional[str] = None
     verified: int
-    dept: Optional[str]
+    dept: Optional[str] = None
     created_at: str
-    pic_url: Optional[str]
-    group_ids: Optional[List[str]]
-    language: Optional[str]
-    phone_number: Optional[str]
+    pic_url: Optional[str] = None
+    group_ids: Optional[List[str]] = None
+    language: Optional[str] = None
+    phone_number: Optional[str] = None
     status: str
     role_id: str
 
