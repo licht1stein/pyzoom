@@ -26,7 +26,7 @@ class ZoomMeetingSettings(MyZoomBase):
     watermark: bool
     use_pmi: bool
     approval_type: Literal[0, 1, 2]
-    registration_type: Optional[Literal[1, 2, 3]]
+    registration_type: Optional[Literal[1, 2, 3]] = None
     audio: Literal["voip", "telephony", "both"]
     auto_recording: Literal["local", "cloud", "none"]
     enforce_login: bool
