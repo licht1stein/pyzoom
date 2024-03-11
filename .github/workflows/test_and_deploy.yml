@@ -63,4 +63,4 @@ jobs:
       run: pip install poetry
     - name: Upload to pypi.org
       run: |
-        poetry publish --build -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PASSWORD }}
+        poetry publish --build -u __token__ -p ${{ secrets.PYPI_APITOKEN }}
