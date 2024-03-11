@@ -26,7 +26,7 @@ class ZoomMeetingSettings(MyZoomBase):
     watermark: bool
     use_pmi: bool
     approval_type: Literal[0, 1, 2]
-    registration_type: Optional[Literal[1, 2, 3]]
+    registration_type: Optional[Literal[1, 2, 3]] = None
     audio: Literal["voip", "telephony", "both"]
     auto_recording: Literal["local", "cloud", "none"]
     enforce_login: bool
@@ -153,7 +153,7 @@ class MeetingParticipantList(MyZoomBase):
     page_count: int
     page_size: int
     total_records: int
-    participants: Optional[List[MeetingParticipant]]
+    participants: Optional[List[MeetingParticipant]] = None
 
     def __len__(self):
         return len(self.participants)
