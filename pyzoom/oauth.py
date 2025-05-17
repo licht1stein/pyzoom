@@ -121,6 +121,10 @@ def oauth_wizard(client_id=None, client_secret=None, port=3000, redirect_uri=Non
         client_secret = getpass("Client Secret: ")
 
     class RequestHandler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, request, client_address, server, *, directory = None):
+            super().__init__(request, client_address, server, directory=directory)
+            self.server.authorization_code = None
+        
         def do_GET(self):
             self.send_response(200)
             self.end_headers()
